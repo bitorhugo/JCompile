@@ -1,6 +1,10 @@
 #!/usr/bin/bash
 
-# usage: jcompile -n <project name> -r <project root>
+# usage: jcompile -n <project name> -r <project root
+if [[ $# -eq 0 ]];then
+   echo "usage: jcompile -n <project name> -r <project root>"
+   return
+fi
 while [[ $# -gt 0 ]]; do
     command=$1
     input=$2
@@ -9,12 +13,15 @@ while [[ $# -gt 0 ]]; do
     
     case ${command} in
         -n) PROJECTNAME=$input
-            echo "name :${PROJECTNAME}";;
+            echo "name: ${PROJECTNAME}";;
         -r) PROJECTROOT=$input
             echo "root: ${PROJECTROOT}";;
-         *)  echo "Invalid arguments"
+        *)  echo "Invalid arguments"
+            return
     esac
 done
 
-find ${PROJECTROOT} -name "*.java" >> ${PROJECTROOT}/modules
+rm -rf ${PROJECTROOT}/out/
+
+find ${PROJECTROOT} -name "*.java" > ${PROJECTROOT}/modules
 javac @${PROJECTROOT}/modules -d ${PROJECTROOT}/out/
