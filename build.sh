@@ -24,4 +24,4 @@ done
 rm -rf ${PROJECTROOT}/out/
 
 find ${PROJECTROOT} -name "*.java" > ${PROJECTROOT}/modules
-javac @${PROJECTROOT}/modules -d ${PROJECTROOT}/out/
+javac @${PROJECTROOT}/modules -d ${PROJECTROOT}/out/production/${PROJECTNAME}
